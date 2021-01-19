@@ -2,8 +2,11 @@ package br.com.design.patterns;
 
 import br.com.design.patterns.pedido.GeraPedido;
 import br.com.design.patterns.pedido.GeraPedidoHandler;
+import br.com.design.patterns.pedido.acao.EnviarEmailPedido;
+import br.com.design.patterns.pedido.acao.SalvarPedidoNoBancoDeDados;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 public class TestesPedidos {
     public static void main(String[] args) {
@@ -13,7 +16,11 @@ public class TestesPedidos {
         int quantidadeItens = Integer.parseInt(args[2]);
 
         GeraPedido geraPedido = new GeraPedido(cliente, valorOrcarmento, quantidadeItens);
-        GeraPedidoHandler geraPedidoHandler = new GeraPedidoHandler(/*injeção de dependencias*/);
+        GeraPedidoHandler geraPedidoHandler = new GeraPedidoHandler(Arrays.asList(
+                new SalvarPedidoNoBancoDeDados(),
+                new EnviarEmailPedido()
+
+        ));
         geraPedidoHandler.execute(geraPedido);
     }
 }
