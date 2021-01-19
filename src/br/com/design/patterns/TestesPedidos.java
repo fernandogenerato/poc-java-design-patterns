@@ -1,6 +1,7 @@
 package br.com.design.patterns;
 
 import br.com.design.patterns.pedido.GeraPedido;
+import br.com.design.patterns.pedido.GeraPedidoHandler;
 
 import java.math.BigDecimal;
 
@@ -12,7 +13,7 @@ public class TestesPedidos {
         int quantidadeItens = Integer.parseInt(args[2]);
 
         GeraPedido geraPedido = new GeraPedido(cliente, valorOrcarmento, quantidadeItens);
-        geraPedido.executa();
-
+        GeraPedidoHandler geraPedidoHandler = new GeraPedidoHandler(/*injeção de dependencias*/);
+        geraPedidoHandler.execute(geraPedido);
     }
 }
